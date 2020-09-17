@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+	<title>SVATANTR</title>
+	<meta charset="UTF-8">
+	<meta name="description" content="Real estate HTML Template">
+	<meta name="keywords" content="real estate, html">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<!-- Favicon -->
+	<link href="img/favicon.ico" rel="shortcut icon"/>
+
+	<!-- Google font -->
+	<link href="https://fonts.googleapis.com/css?family=Lato:400,400i,700,700i,900%7cRoboto:400,400i,500,500i,700,700i&display=swap" rel="stylesheet">
+
+ 
+	<!-- Stylesheets -->
+	<link rel="stylesheet" href="css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="css/font-awesome.min.css"/>
+	<link rel="stylesheet" href="css/slicknav.min.css"/>
+
+	<!-- Main Stylesheets -->
+	<link rel="stylesheet" href="css/style.css"/>
+
+
+	<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	<script>
+		function login() {
+		  window.location="http://localhost:3001/login.html";
+		}
+
+	/*	function getBottleDetails(){
+
+			console.log("inside Bottle");
+			var value = document.getElementById("bottleid").value;
+			console.log(value);
+			//var v1= $("#bottleid").val();
+			//console.log(v1);
+			window.location.href="liquor_details.html?id="+value;
+		}
+		document.getElementById('detform').addEventListener('submit', function(event){
+			var value = document.getElementById("bottleid").value;
+			window.location.href="liquor_details.html?id="+value;
+
+		});*/
+		</script>
+		<script>
+			if (typeof Web3 !== 'undefined') {
+			Web3 = new Web3(Web3.currentProvider);
+
+		} else {
+			Web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+		}
+		window.ethereum.enable().then(function (accounts) {
+			web3.eth.defaultAccount = accounts[0];
+			var contract = web3.eth.contract([{
+					"inputs": [{
+							"internalType": "bytes32",
+							"name": "_bottleid",
+							"type": "bytes32"
+						},
+						{
+							"internalType": "string",
+							"name": "_distilleryCode",
+							"type": "string"
+						},
+						{
+							"internalType": "uint256",
+							"name": "_manufacturedDate",
+							"type": "uint256"
+						}
+					],
+					"name": "addBottleDetails",
+					"outputs": [],
+					"stateMutability": "nonpayable",
+					"type": "function"
+				},
+				{
+					"inputs": [{
+							"internalType": "bytes32",
+							"name": "_crateID",
+							"type": "bytes32"
+						},
+						{
+							"internalType": "string",
+							"name": "_distilleryCode",
+							"type": "string"
+						},
+						{
+							"internalType": "bytes32[]",
+							"name": "_bottleids",
+							"type": "bytes32[]"
+						}
+					],
+					"name": "addCrateDetails",
+					"outputs": [],
+					"stateMutability": "nonpayable",
+					"type": "function"
+				},
+				{
+					"inputs": [{
+							"internalType": "string",
+							"name": "_distilleryCode",
+							"type": "string"
+						},
+						{
+							"internalType": "string",
+							"name": "_name",
+							"type": "string"
+						},
+						{
+							"internalType": "string",
+							"name": "_streetaddress",
+							"type": "string"
+						},
+						{
+							"internalType": "string",
+							"name": "_state",
+							"type": "string"
+						},
+						{
+							"internalType": "string",
+							"name": "_permitid",
+							"type": "string"
+						}
+					],
+					"name": "addDistillerydetails",
+					"outputs": [],
+					"stateMutability": "nonpayable",
+					"type": "function"
+				},
+				{
+					"inputs": [{
+							"internalType": "string",
+							"name": "_distilleryCode",
+							"type": "string"
+						},
+						{
+							"internalType": "bytes32",
+							"name": "_shipmentID",
+							"type": "bytes32"
+						},
+						{
+							"internalType": "string",
+							"name": "_vehiclenumber",
+							"type": "string"
+						},
+						{
+							"internalType": "string",
+							"name": "_Drivername",
+							"type": "string"
+						},
+						{
+							"internalType": "bytes32[]",
+							"name": "_crateid",
+							"type": "bytes32[]"
+						}
+					],
+					"name": "addShipmentDetails",
+					"outputs": [],
+					"stateMutability": "nonpayable",
+					"type": "function"
+				},
+				{
+					"inputs": [{
+							"internalType": "bytes32",
+							"name": "_shipmentID",
+							"type": "bytes32"
+						},
+						{
+							"internalType": "uint256",
+							"name": "_timestamp",
+							"type": "uint256"
+						},
+						{
+							"internalType": "uint256",
+							"name": "_latitude",
+							"type": "uint256"
+						},
+						{
+							"internalType": "uint256",
+							"name": "_longitude",
+							"type": "uint256"
+						}
+					],
+					"name": "addShipmentGPS",
+					"outputs": [],
+					"stateMutability": "nonpayable",
+					"type": "function"
+				},
+				{
+					"inputs": [{
+							"internalType": "bytes32",
+							"name": "_crateID",
+							"type": "bytes32"
+						},
+						{
+							"internalType": "bool",
+							"name": "_isApproved",
+							"type": "bool"
+						},
+						{
+							"internalType": "string",
+							"name": "_approverID",
+							"type": "string"
+						},
+						{
+							"internalType": "uint256",
+							"name": "_timestamp",
+							"type": "uint256"
+						}
+					],
+					"name": "approvecrate",
+					"outputs": [],
+					"stateMutability": "nonpayable",
+					"type": "function"
+				},
+				{
+					"inputs": [],
+					"stateMutability": "nonpayable",
+					"type": "constructor"
+				},
+				{
+					"inputs": [{
+							"internalType": "bytes32",
+							"name": "_bottleid",
+							"type": "bytes32"
+						},
+						{
+							"internalType": "bytes32",
+							"name": "_crateid",
+							"type": "bytes32"
+						}
+					],
+					"name": "updateBottleDetails",
+					"outputs": [],
+					"stateMutability": "nonpayable",
+					"type": "function"
+				},
+				{
+					"inputs": [{
+							"internalType": "bytes32",
+							"name": "_crateID",
+							"type": "bytes32"
+						},
+						{
+							"internalType": "string",
+							"name": "_buyerName",
+							"type": "string"
+						},
+						{
+							"internalType": "string",
+							"name": "_buyerPermitId",
+							"type": "string"
+						}
+					],
+					"name": "updateCrateDetailsBuyer",
+					"outputs": [],
+					"stateMutability": "nonpayable",
+					"type": "function"
+				},
+				{
+					"inputs": [{
+							"internalType": "bytes32",
+							"name": "_crateID",
+							"type": "bytes32"
+						},
+						{
+							"internalType": "bytes32",
+							"name": "_shipmentID",
+							"type": "bytes32"
+						}
+					],
+					"name": "updateCrateDetailsShipment",
+					"outputs": [],
+					"stateMutability": "nonpayable",
+					"type": "function"
+				},
+				{
+					"inputs": [{
+							"internalType": "bytes32",
+							"name": "_shipmentID",
+							"type": "bytes32"
+						},
+						{
+							"internalType": "uint256",
+							"name": "_dtimestamp",
+							"type": "uint256"
+						},
+						{
+							"internalType": "bool",
+							"name": "isDelivered",
+							"type": "bool"
+						}
+					],
+					"name": "updateDeliveryStatus",
+					"outputs": [],
+					"stateMutability": "nonpayable",
+					"type": "function"
+				},
+				{
+					"inputs": [{
+						"internalType": "bytes32",
+						"name": "_bottleid",
+						"type": "bytes32"
+					}],
+					"name": "getBottledetails",
+					"outputs": [{
+							"internalType": "string",
+							"name": "",
+							"type": "string"
+						},
+						{
+							"internalType": "string",
+							"name": "",
+							"type": "string"
+						},
+						{
+							"internalType": "uint256",
+							"name": "",
+							"type": "uint256"
+						},
+						{
+							"internalType": "bytes32",
+							"name": "",
+							"type": "bytes32"
+						}
+					],
+					"stateMutability": "view",
+					"type": "function"
+				},
+				{
+					"inputs": [{
+						"internalType": "bytes32",
+						"name": "_crateID",
+						"type": "bytes32"
+					}],
+					"name": "getCrateDetails",
+					"outputs": [{
+							"internalType": "string",
+							"name": "",
+							"type": "string"
+						},
+						{
+							"internalType": "string",
+							"name": "",
+							"type": "string"
+						},
+						{
+							"internalType": "string",
+							"name": "",
+							"type": "string"
+						},
+						{
+							"internalType": "bytes32[]",
+							"name": "",
+							"type": "bytes32[]"
+						},
+						{
+							"internalType": "enum Distillery.Status",
+							"name": "",
+							"type": "uint8"
+						},
+						{
+							"internalType": "string",
+							"name": "",
+							"type": "string"
+						},
+						{
+							"internalType": "uint256",
+							"name": "",
+							"type": "uint256"
+						},
+						{
+							"internalType": "bytes32",
+							"name": "",
+							"type": "bytes32"
+						}
+					],
+					"stateMutability": "view",
+					"type": "function"
+				},
+				{
+					"inputs": [{
+						"internalType": "string",
+						"name": "_distilleryCode",
+						"type": "string"
+					}],
+					"name": "getDistilleryDetails",
+					"outputs": [{
+							"internalType": "string",
+							"name": "",
+							"type": "string"
+						},
+						{
+							"internalType": "string",
+							"name": "",
+							"type": "string"
+						},
+						{
+							"internalType": "string",
+							"name": "",
+							"type": "string"
+						},
+						{
+							"internalType": "string",
+							"name": "",
+							"type": "string"
+						}
+					],
+					"stateMutability": "view",
+					"type": "function"
+				},
+				{
+					"inputs": [{
+						"internalType": "bytes32",
+						"name": "_shipmentID",
+						"type": "bytes32"
+					}],
+					"name": "getShipmentDeliveryDetails",
+					"outputs": [{
+							"internalType": "enum Distillery.Status",
+							"name": "",
+							"type": "uint8"
+						},
+						{
+							"internalType": "uint256",
+							"name": "",
+							"type": "uint256"
+						}
+					],
+					"stateMutability": "view",
+					"type": "function"
+				},
+				{
+					"inputs": [{
+						"internalType": "bytes32",
+						"name": "_shipmentID",
+						"type": "bytes32"
+					}],
+					"name": "getShipmentDetails",
+					"outputs": [{
+							"internalType": "string",
+							"name": "",
+							"type": "string"
+						},
+						{
+							"internalType": "string",
+							"name": "",
+							"type": "string"
+						},
+						{
+							"internalType": "string",
+							"name": "",
+							"type": "string"
+						},
+						{
+							"internalType": "bytes32[]",
+							"name": "",
+							"type": "bytes32[]"
+						},
+						{
+							"internalType": "enum Distillery.Status",
+							"name": "",
+							"type": "uint8"
+						},
+						{
+							"internalType": "uint256",
+							"name": "",
+							"type": "uint256"
+						},
+						{
+							"internalType": "uint256[]",
+							"name": "",
+							"type": "uint256[]"
+						},
+						{
+							"internalType": "uint256[]",
+							"name": "",
+							"type": "uint256[]"
+						},
+						{
+							"internalType": "uint256[]",
+							"name": "",
+							"type": "uint256[]"
+						}
+					],
+					"stateMutability": "view",
+					"type": "function"
+				}
+			]);
+			var liquorsc = contract.at("0x4A00a8C16E0361aD1718c88F793af5762Df57fb8");
+
+			$("#gbbutton").click(function () {
+				console.log("clicked button");
+				liquorsc.getBottledetails($("#botid").val(), (req, res) => {
+					console.log(res);
+					/*document.getElementById('gbdispres').style.display = 'block';
+					$("#bspanmanname").html(res[0]);
+					$("#bspanstateman").html(res[1]);
+					var d = new Date(res[2].c[0]);
+					$("#bspandateman").html(d);
+					if (res[3] !==
+						"0x0000000000000000000000000000000000000000000000000000000000000000") {
+						$("#bspancid").html(res[3]);
+					} else {
+						$("#bspancid").html("NA");
+					}*/
+					var value = $("#botid").val();
+					var d = new Date(res[2].c[0]);
+					//$(location).attr('href','http://www.example.com')
+					window.location.replace("liquor_details.html?id="+value+"&name="+res[0]+"&state="+res[1]+"&date="+d+"&cid="+res[3]);
+				});
+			});
+		});
+		</script>
+
+</head>
+<body>
+	<!-- Page Preloder -->
+	<div id="preloder">
+		<div class="loader"></div>
+	</div>
+
+	<!-- Header Section -->
+	<header class="header-section">
+		<a href="index.html" class="site-logo">
+			<img src="img/logo.png" alt="">
+		</a>
+		<nav class="header-nav">
+			<ul class="main-menu">
+				<li><a href="index.html" >Home</a></li>
+				<li><a href="#about">About</a></li>
+				<li><a href="#news">News</a></li>
+				<li><a href="#register">Register</a></li>
+
+				<li><a href="#contact">Contact</a></li>
+			</ul>
+			<div class="header-right">
+				<div class="user-panel">
+					<a href="#" class="register" onclick="login()">Sign in</a>
+				</div>
+			</div>
+		</nav>
+	</header>
+	<!-- Header Section end -->
+
+	<!-- Hero Section end -->
+	<section class="hero-section set-bg" data-setbg="img/hero-bg.jpg">
+		<div class="container">
+			<div class="hero-warp">
+				<div>
+					<div class="search-type">
+						<div class="st-item">
+							<input type="radio" name="st" id="buy" checked>
+							<label for="buy">Bottle Details</label>
+						</div>                                              
+					</div>
+					<div class="search-input">
+						<input type="text" placeholder="Enter Bottle Detail" id="botid">
+						<button class="site-btn" type="submit" id="gbbutton">Search</button>
+					</div>
+					<p> </p>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Hero Section end -->
+
+	<!-- Intro Section end -->
+	<section class="intro-section spad" id="about">
+		<div class="container">
+			<div class="section-title">
+				<h2>About</h2>
+			</div>
+			<div class="row intro-first">
+				<div class="col-lg-6 order-lg-2">
+					<img src="img/about/1.jpg" alt="">
+				</div>
+				<div class="col-lg-6 order-lg-1">
+					<div class="about-text">
+						<h3>SVATANTR</h3>
+						<p>SVATANTR is a blockchain backed SCM solution designed for secure and managed transport of liquor from distillery to the liquor permit holders in various states of India	
+							According to Reserve Bank of India, the state excise duty on alcohol is the second largest contributor to a state’s own tax revenue (following sales tax- now replaced by GST), accounting to about 10 to 15 percent for the majority of the states</p>
+						<p> SVATANTR helps in improving accountablity and audit trails. We also help in preventing Counterfiet products entering the markets and lack of visibility.</p>
+						<a href="#" class="readmore-btn">Find out more</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Intro Section end -->
+
+	<!-- Property Section -->
+	<section class="property-section" id="news">
+		<div class="container">
+			<div class="section-title">
+				<h2>News</h2>
+			</div>
+			<div class="row">
+				<div class="col-lg-4">
+					<div class="property-item">
+						
+						<h3>Indian Made Foreign Liquor (IMFL)</h3>
+						
+						<p> Hard liquor that has incorporated imported raw material or borrowed the concept from foreign branded liquor are often termed as Indian Made Foreign Liquor (IMFL).</p>
+						<a href="#" class="readmore-btn">Find out more</a>
+					</div>
+				</div>
+				<div class="col-lg-4">
+					<div class="property-item">
+					
+						<h3>Imported Foreign Liquor (IFL)</h3>
+						
+						<p> IFL includes foreign produced liquor imported to India. IFL constitutes only a marginal share of the total alcohol consumption in India.<br><br></p>
+						<a href="#" class="readmore-btn">Find out more</a>
+					</div>
+				</div>
+				<div class="col-lg-4">
+					<div class="property-item">
+					
+						<h3>Country Liquor</h3>
+						
+						<p> Country Liquor, also called Indian Made Indian Liquor or (IMIL), is brewed and mostly sold domestically. </p><br><br><br><br>
+						<a href="#" class="readmore-btn">Find out more</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Property Section end -->
+
+	<!-- Loan Section end -->
+	<section class="loan-section" id="register">
+		<div class="loan-warp">
+			<div class="container">
+				<div class="section-title text-white">
+					<h2>Register</h2>
+					<p>Regster as a manufacturer. Enter your details we will get back to you for further verifications  </p>
+				</div>
+				<form class="loan-form">
+					<input type="text" placeholder="Email">
+					<input type="text" placeholder="Permit ID">
+					<button class="site-btn">Submit</button>
+				</form>
+			</div>
+		</div>
+	</section>
+	<!-- Loan Section end -->
+
+	<!-- Stories Section end -->
+	<section class="stories-section spad" id="contact">
+		<div class="container">
+			<div class="row ">
+				<div class="col-lg-5 order-lg-2">
+					<img class="w-100" src="img/about/3.jpg" alt="">
+				</div>
+				<div class="col-lg-7 order-lg-1">
+					<div class="about-text">
+						<h2>Contact</h2>
+						<p>Department of Excise, </p>
+						<p>Sterling Road,</p>
+						<p>New Delhi.</p>
+						<p>Phno: 401-00567845</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Stories Section end -->
+
+	<!-- Footer Section -->
+	<footer class="footer-section">
+		<div class="container">
+			<div class="row text-white">
+				<div class="col-lg-4">
+					<div class="footer-widger"></div>
+						<div class="about-widget">
+							<div class="aw-text">
+								<img src="img/footer-logo.png" alt="">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="copyright"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></div>
+		</div>
+	</footer>
+	<!-- Footer Section end -->
+	
+	<!--====== Javascripts & Jquery ======-->
+	<script src="js/jquery-3.2.1.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery.slicknav.min.js"></script>
+	<script src="js/jquery.magnific-popup.min.js"></script>
+	<script src="js/main.js"></script>
+
+	</body>
+</html>
