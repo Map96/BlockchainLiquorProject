@@ -1,4 +1,4 @@
-# BockchainLiquorProject
+# BlockchainLiquorProject
 Liquor Supply Chain Built on Ethereum 
 
 Project By 
